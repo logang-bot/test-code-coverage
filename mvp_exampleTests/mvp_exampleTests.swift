@@ -4,12 +4,79 @@
 //
 //  Created by Alvaro Choque on 21/6/22.
 //
-
 import XCTest
+import UIKit
 @testable import mvp_example
 
-class mvp_exampleTests: XCTestCase {
+class MockPostVC: UIViewController, PostPresenterDelegate {
+    var presentAlertGotCalled = false
+    var presentPostsGotCalled = false
+    
+    func presentPosts(posts: [Post]) {
+       presentPostsGotCalled = true
+    }
+    
+    func presentAlert(title: String, message: String) {
+       presentAlertGotCalled = true
+    }
+}
 
+class mvp_exampleTests: XCTestCase {
+    
+    private var postPresenter: PostPresenter!
+    override func setUp() {
+        super.setUp()
+        postPresenter = PostPresenter()
+    }
+
+    override func tearDown() {
+        postPresenter = nil
+        super.tearDown()
+    }
+    
+    func test_set_delegate() {
+        let postsViewController = PostsViewController()
+        
+        postPresenter.setViewDelegate(delegate: postsViewController.self)
+        
+        XCTAssertTrue(postPresenter.delegate == postsViewController.self)
+    }
+    
+    
+    func test_did_tap() {
+//        let postsViewController = PostsViewController()
+//
+//        postPresenter.setViewDelegate(delegate: postsViewController.self)
+//
+//        let data = try? JSONSerialization.data(withJSONObject: [
+//            "id": "1",
+//            "title": "Some",
+//            "body": "Somebody",
+//        ])
+//        let post = try? JSONDecoder().decode(Post.self, from: data!)
+////
+////        guard let data = data else {return}
+////        do {
+////
+////        } catch {
+////            print(error)
+////        }
+//
+//        let mockPost = MockPostVC()
+//
+//        postPresenter.setViewDelegate(delegate: mockPost as PresenterDelegate )
+//
+//        postPresenter.didTap(post: post!)
+//
+//        XCTAssertTrue(mockPost.presentAlertGotCalled)
+    }
+    
+    
+//    func test_dummy_func() throws {
+//        XCTAssertEqual(postPresenter.dummyFun(), "testing")
+//    }
+
+    
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
@@ -17,20 +84,22 @@ class mvp_exampleTests: XCTestCase {
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
+    
+    
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
+//    func testExample() throws {
+//        // This is an example of a functional test case.
+//        // Use XCTAssert and related functions to verify your tests produce the correct results.
+//        // Any test you write for XCTest can be annotated as throws and async.
+//        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
+//        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
+//    }
+//
+//    func testPerformanceExample() throws {
+//        // This is an example of a performance test case.
+//        self.measure {
+//            // Put the code you want to measure the time of here.
+//        }
+//    }
 
 }
