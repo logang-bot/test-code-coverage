@@ -31,12 +31,12 @@ jobs:
   build:
     runs-on: macos-latest
     steps:
-      - name: Force Xcode 11
-        run: sudo xcode-select -switch /Applications/Xcode_11.5.app
-      - name: Build
-        run: swift build -v
+      - name: Build application
+        run: |
+          set -o pipefail && xcodebuild clean -scheme $SCHEME -destination "platform=iOS Simulator,name=$DEVICE" -derivedDataPath $DERIVED_DATA_PATH build-for-testing | xcpretty --color --simple
       - name: Run tests
-        run: swift test -v
+        run: |
+          set -o pipefail && xcodebuild test-without-building -xctestrun $(find . -type f -name "*.xctestrun") -destination "platform=iOS Simulator,name=$DEVICE" -derivedDataPath $DERIVED_DATA_PATH -enableCodeCoverage YES -only-testing:$UNIT_TEST_TARGET | xcpretty --color --simple
   sonarcloud:
     name: SonarCloud
     runs-on: macos-latest
