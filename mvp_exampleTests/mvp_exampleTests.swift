@@ -42,39 +42,6 @@ class mvp_exampleTests: XCTestCase {
         XCTAssertTrue(postPresenter.delegate == postsViewController.self)
     }
     
-    
-    func test_did_tap() {
-//        let postsViewController = PostsViewController()
-//
-//        postPresenter.setViewDelegate(delegate: postsViewController.self)
-//
-//        let data = try? JSONSerialization.data(withJSONObject: [
-//            "id": "1",
-//            "title": "Some",
-//            "body": "Somebody",
-//        ])
-//        let post = try? JSONDecoder().decode(Post.self, from: data!)
-////
-////        guard let data = data else {return}
-////        do {
-////
-////        } catch {
-////            print(error)
-////        }
-//
-//        let mockPost = MockPostVC()
-//
-//        postPresenter.setViewDelegate(delegate: mockPost as PresenterDelegate )
-//
-//        postPresenter.didTap(post: post!)
-//
-//        XCTAssertTrue(mockPost.presentAlertGotCalled)
-    }
-    
-    
-//    func test_dummy_func() throws {
-//        XCTAssertEqual(postPresenter.dummyFun(), "testing")
-//    }
 
     
     override func setUpWithError() throws {
